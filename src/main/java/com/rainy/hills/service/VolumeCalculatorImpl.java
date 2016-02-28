@@ -1,7 +1,9 @@
 package com.rainy.hills.service;
 
+import javax.ejb.Stateless;
 import java.util.Arrays;
 
+@Stateless
 public class VolumeCalculatorImpl implements VolumeCalculator {
     @Override
     public int calculateVolume(int[] hills) {

@@ -1,12 +1,12 @@
-package com.rainy.hills.web.facade;
+package com.rainy.hills.web.rest;
 
 import com.rainy.hills.web.dto.HillsDto;
 import com.rainy.hills.web.dto.VolumeDto;
 
 /**
- * This facade performs communication between Web and volume calculation services.
+ * This controller performs communication between Web and volume calculation services.
  */
-public class VolumeFacade {
+public class VolumeController {
     public VolumeDto calculateVolume(HillsDto hills) {
         return new VolumeDto();
     }
