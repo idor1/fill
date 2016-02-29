@@ -1,4 +1,4 @@
 package com.rainy.hills.it.facade;
 
-public class VolumeControllerIT {
+public class VolumeControllerTest {
 }
