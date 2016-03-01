@@ -8,7 +8,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <versions.wildfly>8.1.0.Final</versions.wildfly>
+        <versions.wildfly>8.2.1.Final</versions.wildfly>
     </properties>
 
     <build>
@@ -88,6 +88,30 @@
         </dependency>
 
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.websocket</groupId>
+            <artifactId>jboss-websocket-api_1.0_spec</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -131,8 +155,8 @@
                             <systemPropertyVariables>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                                 <!-- the maven dependency plugin will have already downloaded the server on /target -->
-                                <jboss.home>${project.basedir}/target/wildfly-8.1.0.Final</jboss.home>
-                                <module.path>${project.basedir}/target/wildfly-8.1.0.Final/modules</module.path>
+                                <jboss.home>${project.basedir}/target/wildfly-8.2.1.Final</jboss.home>
+                                <module.path>${project.basedir}/target/wildfly-8.2.1.Final/modules</module.path>
                             </systemPropertyVariables>
                             <redirectTestOutputToFile>false</redirectTestOutputToFile>
                         </configuration>
