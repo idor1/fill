@@ -1,4 +1,4 @@
-package com.rainy.hills.unit.service;
+package com.rainy.hills.service;
 
 /**
  * This interface contains methods used to calculate
