@@ -17,7 +17,9 @@ import java.util.Collections;
 /**
  * This controller performs communication between Web and volume calculation services.
  */
-@Path("/")
+@Path("/volume")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class VolumeController {
 
     private static Logger logger = Logger.getLogger(VolumeController.class);
@@ -26,9 +28,7 @@ public class VolumeController {
     private VolumeCalculator volumeCalculator;
 
     @POST
-    @Path("volume")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+//    @Path("/volume")
     public VolumeDto calculateVolume(HillsDto hillsDto) {
 
         logger.trace(hillsDto);

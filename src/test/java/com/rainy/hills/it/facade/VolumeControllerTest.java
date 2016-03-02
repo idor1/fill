@@ -51,7 +51,7 @@ public class VolumeControllerTest {
 
         String body = objectMapper.writeValueAsString(hillsDto);
 
-        Response postResponse = Request.Post(baseUrl + "volume")
+        Response postResponse = Request.Post(baseUrl + "rest/volume")
                 .bodyString(body, ContentType.APPLICATION_JSON)
                 .execute();
 

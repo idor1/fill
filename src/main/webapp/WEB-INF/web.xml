@@ -3,9 +3,9 @@
 
     <display-name>Rainy Hills</display-name>
 
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>index.html</welcome-file>-->
+    <!--</welcome-file-list>-->
 
     <context-param>
         <param-name>resteasy.scan</param-name>
@@ -14,7 +14,7 @@
 
     <context-param>
         <param-name>resteasy.servlet.mapping.prefix</param-name>
-        <param-value>/</param-value>
+        <param-value>/rest</param-value>
     </context-param>
 
     <listener>
@@ -30,7 +30,7 @@
 
     <servlet-mapping>
         <servlet-name>resteasy-servlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
