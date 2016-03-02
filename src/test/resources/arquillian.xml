@@ -6,6 +6,8 @@ http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <container qualifier="wildfly" default="true">
         <configuration>
             <property name="jbossHome">target/wildfly-8.2.1.Final</property>
+            <property name="javaVmArguments">-Djboss.socket.binding.port-offset=100</property>
+            <property name="managementPort">10090</property>
         </configuration>
     </container>
 

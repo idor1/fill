@@ -2,9 +2,23 @@ package com.rainy.hills.service;
 
 import javax.ejb.Stateless;
 import java.util.Arrays;
+import java.util.List;
 
 @Stateless
 public class VolumeCalculatorImpl implements VolumeCalculator {
+    @Override
+    public int calculateVolume(List<Integer> hills2) {
+        int[] hills = new int[hills2.size()];
+
+        int i = 0;
+        for (Integer integer : hills2) {
+            hills[i] = integer;
+            i++;
+        }
+
+        return calculateVolume(hills);
+    }
+
     @Override
     public int calculateVolume(int[] hills) {
         if (hills == null || hills.length == 0) {

@@ -1,5 +1,7 @@
 package com.rainy.hills.service;
 
+import java.util.List;
+
 /**
  * This interface contains methods used to calculate
  * the volume of the water which is left in hills after rain
@@ -11,5 +13,7 @@ public interface VolumeCalculator {
      * @param hills array of elevations of the hills
      * @return calculated volume for given {@code hills}
      */
+    int calculateVolume(List<Integer> hills);
+
     int calculateVolume(int[] hills);
 }

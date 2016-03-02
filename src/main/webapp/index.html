@@ -1,81 +1,88 @@
-<!DOCTYPE html>
-
-<html>
+<!doctype html>
+<html ng-app="app">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <meta charset="UTF-8">
+    <title>Rainy Hills</title>
+
+    <link rel="shortcut icon" href="marker.png">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="atm.css">
+    <style>
+        body {
+            padding-top: 30px;
+        }
+    </style>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script src="controllers.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+    <script>
+        var contextPath =  window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+    </script>
+
 </head>
 
 <body>
-<meta charset="utf-8">
-<title>HelloWorld Web sockets</title>
-<script language="javascript" type="text/javascript">
-    var wsUri = getRootUri() + "/hills/hello";
+<div id="atm-all" ng-controller="AtmController" class="container">
+    <div id="atm-table">
+        City to search ATMs:&nbsp;<input type="text" ng-model="city" placeholder="All cities"/>
+        <button class="btn btn-default" ng-click="searchAtms()">ATM Search</button>
+        <br>
 
-    function getRootUri() {
-        return "ws://" + (document.location.hostname == "" ? "localhost" : document.location.hostname) + ":" +
-                (document.location.port == "" ? "8080" : document.location.port);
-    }
+        <form>
+            <div class="form-group" style="margin-top: 15px;">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
 
-    function init() {
-        output = document.getElementById("output");
-    }
+                    <input type="text" class="form-control" placeholder="Search by word" ng-model="searchField">
 
-    function send_message() {
-
-        websocket = new WebSocket(wsUri);
-        websocket.onopen = function (evt) {
-            onOpen(evt)
-        };
-        websocket.onmessage = function (evt) {
-            onMessage(evt)
-        };
-        websocket.onerror = function (evt) {
-            onError(evt)
-        };
-
-    }
-
-    function onOpen(evt) {
-        writeToScreen("Connected to Endpoint!");
-        doSend(textID.value);
-
-    }
-
-    function onMessage(evt) {
-        writeToScreen("Message Received: " + evt.data);
-    }
-
-    function onError(evt) {
-        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    }
-
-    function doSend(message) {
-        writeToScreen("Message Sent: " + message);
-        websocket.send(message);
-    }
-
-    function writeToScreen(message) {
-        var pre = document.createElement("p");
-        pre.style.wordWrap = "break-word";
-        pre.innerHTML = message;
-
-        output.appendChild(pre);
-    }
-
-    window.addEventListener("load", init, false);
-
-</script>
-
-<h1 style="text-align: center;">Hello World WebSocket Client</h2>
-
-    <br>
-
-    <div style="text-align: center;">
-        <form action="">
-            <input onclick="send_message()" value="Send" type="button">
-            <input id="textID" name="message" value="Hello WebSocket!" type="text"><br>
+                </div>
+            </div>
         </form>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+            <tr>
+                <td>
+                    <a href="#" ng-click="sortType = 'city'; sortReverse = !sortReverse">
+                        City
+                        <span ng-show="sortType == 'city' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'city' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'street'; sortReverse = !sortReverse">
+                        Street
+                        <span ng-show="sortType == 'street' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'street' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    House Number
+                </td>
+                <td>
+                    Postal Code
+                </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="atm in atms | orderBy:sortType:sortReverse | filter:searchField"
+                ng-click="showCloser(atm.geoLocation.latitude, atm.geoLocation.longitude)">
+                <td>{{ atm.city }}</td>
+                <td>{{ atm.street }}</td>
+                <td>{{ atm.houseNumber }}</td>
+                <td>{{ atm.postalCode }}</td>
+            </tr>
+            </tbody>
+
+        </table>
     </div>
-    <div id="output"></div>
+</div>
 </body>
 </html>

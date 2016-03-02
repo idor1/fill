@@ -3,6 +3,10 @@
 
     <display-name>Rainy Hills</display-name>
 
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
     <context-param>
         <param-name>resteasy.scan</param-name>
         <param-value>true</param-value>

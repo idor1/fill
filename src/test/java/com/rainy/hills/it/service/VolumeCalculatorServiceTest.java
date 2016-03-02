@@ -30,10 +30,7 @@ public class VolumeCalculatorServiceTest {
     }
 
     @Test
-    public void testVolumeCalculationPossible() {
-
-        assertEquals(0, volumeCalculator.calculateVolume(new int[]{}));
-
+    public void testVolumeCalculatorServiceAvailable() {
         assertEquals(11, volumeCalculator.calculateVolume(new int[]{4, 1, 4, 0, 4, 1, 5, 0, 1}));
     }
 }

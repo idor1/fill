@@ -9,6 +9,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <versions.wildfly>8.2.1.Final</versions.wildfly>
+        <versions.jackson>2.1.2</versions.jackson>
     </properties>
 
     <build>
@@ -93,9 +94,27 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--<dependency>-->
+        <!--<groupId>org.jboss.resteasy</groupId>-->
+        <!--<artifactId>resteasy-jackson-provider</artifactId>-->
+        <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
+            <artifactId>jaxrs-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -106,34 +125,114 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.websocket</groupId>
-            <artifactId>jboss-websocket-api_1.0_spec</artifactId>
-            <version>1.0.0.Final</version>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.jboss.spec.javax.websocket</groupId>-->
+        <!--<artifactId>jboss-websocket-api_1.0_spec</artifactId>-->
+        <!--<version>1.0.0.Final</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-arquillian-container-embedded</artifactId>
+            <artifactId>wildfly-arquillian-container-managed</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.wildfly</groupId>-->
+            <!--<artifactId>wildfly-managed</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-rest-client-api</artifactId>
+            <version>1.0.0.Alpha4</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-embedded</artifactId>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-rest-client-impl-3x</artifactId>
+            <version>1.0.0.Alpha4</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.3.6</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.resteasy</groupId>-->
+            <!--<artifactId>resteasy-client</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.shrinkwrap.resolver</groupId>-->
+            <!--<artifactId>shrinkwrap-resolver-impl-maven</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-annotations</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-core</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <scope>test</scope>
+            <!--<version>2.6.3</version>-->
+        </dependency>
+
     </dependencies>
 
     <profiles>
@@ -202,6 +301,7 @@
                     </plugin>
                 </plugins>
             </build>
+
         </profile>
     </profiles>
 
