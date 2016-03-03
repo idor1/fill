@@ -18,7 +18,7 @@ public class VolumeCalculatorLongDataTest {
     public void testCalculateVolumeLongList() {
         int highest = 10;
 
-        int length = 10_000_000;
+        int length = 1_000_000;
 
         List<Integer> hills = new ArrayList<>();
 
