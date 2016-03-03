@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html ng-app="app">
 <head>
     <meta charset="UTF-8">
@@ -11,20 +12,21 @@
     <link href="resources/css/style.css" rel="stylesheet">
 
     <script>
-        var contextPath =  window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+        var contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
     </script>
-
 </head>
 
 <body>
-<div ng-controller="HillsController">
-    <h4>Try left click to creates hill and double click to clear whole row</h4>
+<div ng-controller="HillsController" class="main">
+    <h4>Left click on the cell to edit a green hill<br><br>
+        Double click on the cell to clear whole column</h4><br>
     <table class="table; width: 100%">
         <tbody>
         <tr ng-repeat="cols in rows">
-            <td ng-repeat = "col in cols" ng-class="{green: (col.v == 1), white: (col.v == 0)}">
-                <span ng-click="$evalAsync(cellClick(col.r, col.c))" ng-dblclick="cellDblClick(col.r, col.c)">
-                    {{col.v}}</span></td>
+            <td ng-repeat="col in cols" ng-class="{green: (col.v == 1), white: (col.v == 0)}"
+                ng-click="$evalAsync(cellClick(col.r, col.c))"
+                ng-dblclick="cellDblClick(col.r, col.c)">
+            </td>
         </tr>
         </tbody>
     </table>
@@ -34,7 +36,6 @@
     </button>
     <br>
     <h4>Volume: {{volume}}</h4>
-    </div>
 </div>
 </body>
 </html>

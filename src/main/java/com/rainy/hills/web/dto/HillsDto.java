@@ -1,7 +1,6 @@
 package com.rainy.hills.web.dto;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class HillsDto {
     private int[] hills;

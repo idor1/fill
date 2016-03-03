@@ -28,12 +28,13 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
-                    <excludes>
-                        <exclude>**/it/**</exclude>
-                    </excludes>
                     <includes>
                         <include>**/unit/**</include>
                     </includes>
+                    <excludes>
+                        <exclude>**/it/**</exclude>
+                        <exclude>**/longdata/**</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
@@ -76,6 +77,14 @@
                 <type>pom</type>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>2.5</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>
@@ -93,12 +102,6 @@
             <artifactId>resteasy-jaxrs</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>org.jboss.resteasy</groupId>-->
-        <!--<artifactId>resteasy-jackson-provider</artifactId>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -125,16 +128,14 @@
         </dependency>
 
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>provided</scope>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>org.jboss.spec.javax.websocket</groupId>-->
-        <!--<artifactId>jboss-websocket-api_1.0_spec</artifactId>-->
-        <!--<version>1.0.0.Final</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
@@ -147,12 +148,6 @@
             <artifactId>wildfly-arquillian-container-managed</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.wildfly</groupId>-->
-            <!--<artifactId>wildfly-managed</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
@@ -202,39 +197,15 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.jboss.resteasy</groupId>-->
-            <!--<artifactId>resteasy-client</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.jboss.shrinkwrap.resolver</groupId>-->
-            <!--<artifactId>shrinkwrap-resolver-impl-maven</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-annotations</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-            <!--<artifactId>jackson-core</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <scope>test</scope>
-            <!--<version>2.6.3</version>-->
         </dependency>
 
     </dependencies>
 
+    <!--Profile for integration tests-->
     <profiles>
         <profile>
             <id>integration-test</id>
@@ -250,6 +221,7 @@
                             </includes>
                             <excludes>
                                 <exclude>**/unit/**</exclude>
+                                <exclude>**/longdata/**</exclude>
                             </excludes>
                             <systemPropertyVariables>
                                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
@@ -297,11 +269,58 @@
                                     </artifactItems>
                                 </configuration>
                             </execution>
+
+                            <execution>
+                                <id>copy-test-libs</id>
+                                <phase>process-test-resources</phase>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.apache.logging.log4j</groupId>
+                                            <artifactId>log4j-core</artifactId>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>org.apache.logging.log4j</groupId>
+                                            <artifactId>log4j-api</artifactId>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <outputDirectory>
+                                        ${project.build.directory}/test-libs
+                                    </outputDirectory>
+                                    <stripVersion>true</stripVersion>
+                                </configuration>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+
                         </executions>
                     </plugin>
                 </plugins>
             </build>
 
+        </profile>
+
+        <!--Profile for tests with long arrays-->
+        <profile>
+            <id>long-data-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.19.1</version>
+                        <configuration>
+                            <includes>
+                                <include>**/longdata/**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/unit/**</exclude>
+                                <exclude>**/it/**</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 

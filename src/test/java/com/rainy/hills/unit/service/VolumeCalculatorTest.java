@@ -2,10 +2,7 @@ package com.rainy.hills.unit.service;
 
 import com.rainy.hills.service.VolumeCalculator;
 import com.rainy.hills.service.VolumeCalculatorImpl;
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,31 +31,8 @@ public class VolumeCalculatorTest {
 
         assertEquals(3, volumeCalculator.calculateVolume(new int[]{4, 3, 2, 1, 3, 1, 0}));
 
-//        assertEquals(0, volumeCalculator.calculateVolume(null));
+        assertEquals(0, volumeCalculator.calculateVolume(null));
 
         assertEquals(0, volumeCalculator.calculateVolume(new int[0]));
-    }
-
-    //TODO deal with this test
-    @Test
-    public void testCalculateVolumeLongArray() {
-        int length = 1_000_000;
-
-        int[] hills = new int[length];
-
-        hills[0] = 1000;
-        hills[hills.length - 1] = 1000;
-
-        Random r = new Random(999);
-
-        for (int i = 1; i < hills.length - 1; i++) {
-            hills[i] = r.nextInt();
-        }
-
-        int volume = volumeCalculator.calculateVolume(hills);
-
-        System.out.print(volume);
-
-        Assert.assertTrue(true);
     }
 }

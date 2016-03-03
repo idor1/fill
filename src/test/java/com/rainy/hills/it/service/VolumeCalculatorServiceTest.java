@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
+import java.io.File;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -26,6 +27,8 @@ public class VolumeCalculatorServiceTest {
         return ShrinkWrap.create(WebArchive.class, "hills.war")
                 .addClass(VolumeCalculator.class)
                 .addClass(VolumeCalculatorImpl.class)
+                .addAsLibraries(new File("target/test-libs/log4j-api.jar"))
+                .addAsLibraries(new File("target/test-libs/log4j-core.jar"))
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 

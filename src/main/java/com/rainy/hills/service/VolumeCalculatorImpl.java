@@ -1,29 +1,24 @@
 package com.rainy.hills.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ejb.Stateless;
 import java.util.Arrays;
-import java.util.List;
 
 @Stateless
 public class VolumeCalculatorImpl implements VolumeCalculator {
-    @Override
-    public int calculateVolume(List<Integer> hills2) {
-        int[] hills = new int[hills2.size()];
 
-        int i = 0;
-        for (Integer integer : hills2) {
-            hills[i] = integer;
-            i++;
-        }
-
-        return calculateVolume(hills);
-    }
+    private static final Logger logger = LogManager.getLogger(VolumeCalculatorImpl.class);
 
     @Override
     public int calculateVolume(int[] hills) {
+        logger.debug("Incoming array: " + Arrays.toString(hills));
+
         if (hills == null || hills.length == 0) {
             return 0;
         }
+
         int smallerBorder;
         int volume = 0;
         int j = hills.length;
@@ -54,6 +49,9 @@ public class VolumeCalculatorImpl implements VolumeCalculator {
                 }
             }
         }
+
+        logger.debug("Calculated volume: " + volume);
+
         return volume;
     }
 }
