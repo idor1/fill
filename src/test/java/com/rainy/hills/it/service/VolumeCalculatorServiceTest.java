@@ -14,6 +14,8 @@ import org.junit.runner.RunWith;
 
 import javax.ejb.EJB;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -34,6 +36,6 @@ public class VolumeCalculatorServiceTest {
 
     @Test
     public void testVolumeCalculatorServiceAvailable() {
-        assertEquals(11, volumeCalculator.calculateVolume(new int[]{4, 1, 4, 0, 4, 1, 5, 0, 1}));
+        assertEquals(11, volumeCalculator.calculateVolume(new ArrayList<>(Arrays.asList(4, 1, 4, 0, 4, 1, 5, 0, 1))));
     }
 }

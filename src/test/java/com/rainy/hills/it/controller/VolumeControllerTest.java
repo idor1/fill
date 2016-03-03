@@ -24,6 +24,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,7 +50,7 @@ public class VolumeControllerTest {
     public void testVolumeEndpointAvailable(@ArquillianResource URL baseUrl) throws IOException, URISyntaxException {
         HillsDto hillsDto = new HillsDto();
 
-        hillsDto.setHills(new int[]{2, 0, 4});
+        hillsDto.setHills(new ArrayList<>(Arrays.asList(2, 0, 4)));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -67,7 +69,7 @@ public class VolumeControllerTest {
     public void testVolumeEndpointContentReceived(@ArquillianResource URL baseUrl) throws IOException, URISyntaxException {
         HillsDto hillsDto = new HillsDto();
 
-        hillsDto.setHills(new int[]{2, 0, 4});
+        hillsDto.setHills(new ArrayList<>(Arrays.asList(2, 0, 4)));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -88,7 +90,7 @@ public class VolumeControllerTest {
     public void testVolumeEndpointWrongMediaType(@ArquillianResource URL baseUrl) throws IOException, URISyntaxException {
         HillsDto hillsDto = new HillsDto();
 
-        hillsDto.setHills(new int[]{2, 1, 6});
+        hillsDto.setHills(new ArrayList<>(Arrays.asList(2, 1, 6)));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -106,7 +108,7 @@ public class VolumeControllerTest {
     public void testVolumeEndpointMethodNotAllowed(@ArquillianResource URL baseUrl) throws IOException, URISyntaxException {
         HillsDto hillsDto = new HillsDto();
 
-        hillsDto.setHills(new int[]{2, 1, 6});
+        hillsDto.setHills(new ArrayList<>(Arrays.asList(2, 1, 6)));
 
         ObjectMapper objectMapper = new ObjectMapper();
 

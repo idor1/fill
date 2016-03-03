@@ -4,6 +4,8 @@ import com.rainy.hills.service.VolumeCalculator;
 import com.rainy.hills.service.VolumeCalculatorImpl;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static org.junit.Assert.assertTrue;
@@ -13,21 +15,22 @@ public class VolumeCalculatorLongDataTest {
     private VolumeCalculator volumeCalculator = new VolumeCalculatorImpl();
 
     @Test
-    public void testCalculateVolumeLongArray() {
-        int highest = 1000;
+    public void testCalculateVolumeLongList() {
+        int highest = 10;
 
-        int length = 1_000_000;
+        int length = 10_000_000;
 
-        int[] hills = new int[length];
+        List<Integer> hills = new ArrayList<>();
 
-        hills[0] = 1000;
-        hills[hills.length - 1] = 1000;
+        hills.add(highest);
 
         Random r = new Random();
 
-        for (int i = 1; i < hills.length - 1; i++) {
-            hills[i] = r.nextInt(highest);
+        for (int i = 1; i < length - 1; i++) {
+            hills.add(r.nextInt(highest - 1));
         }
+
+        hills.add(highest);
 
         int volume = volumeCalculator.calculateVolume(hills);
 
